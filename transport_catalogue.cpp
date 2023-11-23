@@ -43,6 +43,9 @@ namespace transport {
 		stops_buses_[stop].insert(&buses_[name]);
 	}
 
+	void TransportCatalogue::SetParams(Settings settings) {
+		settings_ = move(settings);
+	}
 
 	Stop TransportCatalogue::FindStop(const string& name) const {
 		auto it = stops_.find(name);

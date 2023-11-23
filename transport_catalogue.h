@@ -9,6 +9,13 @@
 
 namespace transport {
 
+	struct Settings {
+		int bus_wait_time{};
+		int bus_velocity{};
+		Settings& SetWaitTime(int a) { bus_wait_time = a; return *this; }
+		Settings& SetVelocity(int a) { bus_velocity = a; return *this; }
+	};
+
 	struct Stop {
 		std::string name;
 		geo::Coordinates coordinates;
@@ -63,6 +70,8 @@ namespace transport {
 
 		void AddBus(const std::string& name, const std::string& stop, bool is_roundtrip);
 
+		void SetParams(Settings settings);
+
 		template<typename Container>
 		void AddBus(const std::string& name, const Container& stops, bool is_roundtrip);
 
@@ -85,6 +94,7 @@ namespace transport {
 		std::map<std::string, BusOrig> buses_;
 		std::unordered_map<std::string, std::set<BusOrig*, BusOrigComparator>, std::hash<std::string>> stops_buses_;
 		std::unordered_map<std::pair<Stop*, Stop*>, int, PairHasher> distances_;
+		Settings settings_;
 
 		BusOrig FindBusOrig(const std::string& name) const;
 	};

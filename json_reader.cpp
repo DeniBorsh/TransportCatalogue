@@ -33,56 +33,64 @@ void ReadJson(transport::TransportCatalogue& tc, istream& input, ostream& output
 	}
 
 	Array stat_array = all.at("stat_requests").AsArray();
-	if (!stat_array.empty()) {
-		Array out_all;
+	
+	Array out_all;
+	for (const Node& query : stat_array) {
+		Dict cur_query = query.AsDict();
+		int id = cur_query.at("id").AsInt();
+		string type { cur_query.at("type").AsString() };
 
-		for (const Node& query : stat_array) {
-			Dict cur_query = query.AsDict();
-			int id = cur_query.at("id").AsInt();
+		if (type == "Stop") {
+			string name = cur_query.at("name").AsString();
+			Dict dict;
+			dict["request_id"] = { id };
 
-			if (cur_query.at("type") == "Stop") {
-				string name = cur_query.at("name").AsString();
-				Dict dict;
-				dict["request_id"] = { id };
-
-				if (tc.GetStopInfoString(name).first == "not found")
-					dict["error_message"] = { "not found" };
-				else if (tc.GetStopInfoString(name).first == "no buses")
-					dict["error_message"] = { "no buses" };
-				else {
-					Array arr;
-					for (const string& bus : tc.GetStopInfoString(name).second)
-						arr.push_back({ bus });
-					dict["buses"] = { move(arr) };
-				}
-				out_all.push_back({ move(dict) });
+			if (tc.GetStopInfoString(name).first == "not found")
+				dict["error_message"] = { "not found" };
+			else if (tc.GetStopInfoString(name).first == "no buses")
+				dict["error_message"] = { "no buses" };
+			else {
+				Array arr;
+				for (const string& bus : tc.GetStopInfoString(name).second)
+					arr.push_back({ bus });
+				dict["buses"] = { move(arr) };
 			}
-			else if (cur_query.at("type") == "Bus") {
-				string name = cur_query.at("name").AsString();
-				Dict dict;
-				dict["request_id"] = { id };
-
-				if (tc.GetBusInfoString(name).first == "not found")
-					dict["error_message"] = { "not found" };
-				else {
-					auto map = tc.GetBusInfoString(name).second;
-					dict["curvature"] = { map.at("curvature") };
-					dict["route_length"] = { map.at("route_length") };
-					dict["stop_count"] = { map.at("stop_count") };
-					dict["unique_stop_count"] = { map.at("unique_stop_count") };
-				}
-				out_all.push_back({ move(dict) });
-			}
-			else if (cur_query.at("type") == "Map") {
-				Dict dict;
-				dict["map"] = GetSvg(tc, all.at("render_settings").AsDict());
-				dict["request_id"] = id;
-				out_all.push_back({ move(dict) });
-			}
+			out_all.push_back({ move(dict) });
 		}
+		else if (type == "Bus") {
+			string name = cur_query.at("name").AsString();
+			Dict dict;
+			dict["request_id"] = { id };
 
+			if (tc.GetBusInfoString(name).first == "not found")
+				dict["error_message"] = { "not found" };
+			else {
+				auto map = tc.GetBusInfoString(name).second;
+				dict["curvature"] = { map.at("curvature") };
+				dict["route_length"] = { map.at("route_length") };
+				dict["stop_count"] = { map.at("stop_count") };
+				dict["unique_stop_count"] = { map.at("unique_stop_count") };
+			}
+			out_all.push_back({ move(dict) });
+		}
+		else if (type == "Map") {
+			Dict dict;
+			dict["map"] = GetSvg(tc, all.at("render_settings").AsDict());
+			dict["request_id"] = id;
+			out_all.push_back({ move(dict) });
+		}
+		else if (type == "Route") {
+			string from { cur_query.at("from").AsString() };
+			string to { cur_query.at("to").AsString() };
+
+		}
 		json::Print(Document{out_all}, { cout });
 	}
+
+	Dict settings_dict = all.at("routing_settings").AsDict();
+	int bus_wait_time = settings_dict.count("bus_wait_time") ? settings_dict.at("bus_wait_time").AsInt() : -1;
+	int bus_velocity = settings_dict.count("bus_velocity") ? settings_dict.at("bus_velocity").AsInt() : -1;
+	tc.SetParams(transport::Settings().SetWaitTime(bus_wait_time).SetVelocity(bus_velocity));
 
 }
 
