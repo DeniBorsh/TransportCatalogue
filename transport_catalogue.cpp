@@ -7,7 +7,7 @@ namespace transport {
 	void TransportCatalogue::AddStop(const string& name, double lat, double lng) {
 		auto it = stops_.find(name);
 		if (it == stops_.end()) {
-			Stop stop{ name, {lat, lng} };
+			Stop stop{ name, {lat, lng}, stops_count_++ };
 			stops_.emplace(name, move(stop));
 		}
 		else {
@@ -30,6 +30,7 @@ namespace transport {
 		pair<Stop*, Stop*> stops_pair(&stops_[first], &stops_[second]);
 		pair<Stop*, Stop*> stops_pair_rev(stops_pair.second, stops_pair.first);
 		distances_[stops_pair] = distance;
+		if (!distances_.count(stops_pair_rev)) distances_[stops_pair_rev] = distance;
 	}
 
 
@@ -37,6 +38,7 @@ namespace transport {
 		if (!stops_.count(stop)) AddStop(stop, 0.0, 0.0);
 		BusOrig bus;
 		bus.name = name;
+		bus.id = buses_count_++;
 		bus.is_roundtrip = is_roundtrip;
 		bus.stops.push_back(&((*stops_.find(stop)).second));
 		buses_[name] = move(bus);
@@ -50,7 +52,7 @@ namespace transport {
 	Stop TransportCatalogue::FindStop(const string& name) const {
 		auto it = stops_.find(name);
 		if (it != stops_.end()) return (*it).second;
-		else return Stop{ "", 0.0, 0.0 };
+		else return Stop{ "", 0.0, 0.0, 0 };
 	}
 
 	Bus TransportCatalogue::FindBus(const string& name) const {
@@ -60,10 +62,10 @@ namespace transport {
 			for (const Stop* stop : it->second.stops) {
 				stops.push_back(*stop);
 			}
-			return Bus{ name, move(stops), it->second.is_roundtrip };
+			return Bus{ name, move(stops), it->second.is_roundtrip, it->second.id };
 		}
 		else {
-			return Bus{ name, vector<Stop>{}};
+			return Bus{ name, vector<Stop>{}, 0};
 		}
 	}
 
@@ -89,7 +91,7 @@ namespace transport {
 		output["route_length"] = route_length;
 
 		output["curvature"] = (1.0 * route_length / route_length_straight);
-		return move(output);
+		return output;
 	}
 
 	pair<string, unordered_map<string, double>> TransportCatalogue::GetBusInfoString(const string& name) const {
@@ -124,6 +126,18 @@ namespace transport {
 
 	const map<string, BusOrig>& TransportCatalogue::GetBuses() const {
 		return buses_;
+	}
+
+	int TransportCatalogue::GetDistance(Stop* first, Stop* second) const {
+		return distances_.at(make_pair( first, second ));
+	}
+
+	Settings TransportCatalogue::GetSettings() const {
+		return settings_;
+	}
+
+	size_t TransportCatalogue::GetStopsCount() const {
+		return stops_count_;
 	}
 
 }

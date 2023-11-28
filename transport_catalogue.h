@@ -10,27 +10,30 @@
 namespace transport {
 
 	struct Settings {
-		int bus_wait_time{};
-		int bus_velocity{};
-		Settings& SetWaitTime(int a) { bus_wait_time = a; return *this; }
-		Settings& SetVelocity(int a) { bus_velocity = a; return *this; }
+		double bus_wait_time{};
+		double bus_velocity{};
+		Settings& SetWaitTime(double a) { bus_wait_time = a; return *this; }
+		Settings& SetVelocity(double a) { bus_velocity = a; return *this; }
 	};
 
 	struct Stop {
 		std::string name;
 		geo::Coordinates coordinates;
+		size_t id;
 	};
 
 	struct Bus {
 		std::string name;
 		std::vector<Stop> stops;
 		bool is_roundtrip = true;
+		size_t id;
 	};
 
 	struct BusOrig {
 		std::string name;
 		std::vector<Stop*> stops;
 		bool is_roundtrip = true;
+		size_t id;
 	};
 
 	struct StopComparator {
@@ -89,11 +92,19 @@ namespace transport {
 
 		const std::map<std::string, BusOrig>& GetBuses() const;
 
+		int GetDistance(Stop* first, Stop* second) const;
+
+		Settings GetSettings() const;
+
+		size_t GetStopsCount() const;
+
 	private:
 		std::unordered_map<std::string, Stop, std::hash<std::string>> stops_;
 		std::map<std::string, BusOrig> buses_;
 		std::unordered_map<std::string, std::set<BusOrig*, BusOrigComparator>, std::hash<std::string>> stops_buses_;
 		std::unordered_map<std::pair<Stop*, Stop*>, int, PairHasher> distances_;
+		size_t stops_count_ = 0;
+		size_t buses_count_ = 0;
 		Settings settings_;
 
 		BusOrig FindBusOrig(const std::string& name) const;
@@ -103,6 +114,7 @@ namespace transport {
 	void TransportCatalogue::AddBus(const std::string& name, const Container& stops, bool is_roundtrip) {
 		BusOrig bus;
 		bus.name = name;
+		bus.id = buses_count_++;
 		bus.is_roundtrip = is_roundtrip;
 		for (const auto& stop : stops) {
 			if (!stops_.count(stop)) AddStop(stop, 0.0, 0.0);

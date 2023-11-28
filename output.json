@@ -1,65 +1,61 @@
 [
     {
-        "curvature": 1.25248,
-        "request_id": 1658922989,
-        "route_length": 836740,
-        "stop_count": 3,
-        "unique_stop_count": 2
+        "curvature": 1.63414,
+        "request_id": 1,
+        "route_length": 24490,
+        "stop_count": 7,
+        "unique_stop_count": 4
     },
     {
-        "curvature": 1.25248,
-        "request_id": 946024612,
-        "route_length": 836740,
-        "stop_count": 3,
-        "unique_stop_count": 2
-    },
-    {
-        "curvature": 1.25248,
-        "request_id": 1960236243,
-        "route_length": 836740,
-        "stop_count": 3,
-        "unique_stop_count": 2
-    },
-    {
-        "curvature": 1.25248,
-        "request_id": 946024612,
-        "route_length": 836740,
-        "stop_count": 3,
-        "unique_stop_count": 2
-    },
-    {
-        "buses": [
-            "RkYZl",
-            "i",
-            "jUYheoA3Mcm2 kqTN"
+        "items": [
+            {
+                "stop_name": "Zagorye",
+                "time": 2,
+                "type": "Wait"
+            },
+            {
+                "bus": "289",
+                "span_count": 1,
+                "time": 0.46,
+                "type": "Bus"
+            },
+            {
+                "stop_name": "Lipetskaya ulitsa 46",
+                "time": 2,
+                "type": "Wait"
+            },
+            {
+                "bus": "289",
+                "span_count": 1,
+                "time": 24.8,
+                "type": "Bus"
+            }
         ],
-        "request_id": 2067965337
+        "request_id": 2,
+        "total_time": 29.26
     },
     {
-        "error_message": "not found",
-        "request_id": 1086415934
-    },
-    {
-        "error_message": "not found",
-        "request_id": 967287382
-    },
-    {
-        "buses": [
-            "RkYZl",
-            "i",
-            "jUYheoA3Mcm2 kqTN"
+        "items": [
+            {
+                "stop_name": "Moskvorechye",
+                "time": 2,
+                "type": "Wait"
+            },
+            {
+                "bus": "289",
+                "span_count": 1,
+                "time": 20,
+                "type": "Bus"
+            }
         ],
-        "request_id": 1425889316
+        "request_id": 3,
+        "total_time": 22
     },
     {
-        "curvature": 1.25248,
-        "request_id": 1658922989,
-        "route_length": 836740,
-        "stop_count": 3,
-        "unique_stop_count": 2
-    },
-    {
-        "map": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">\n  <polyline points=\"25924.4,35685.7 22325.6,22325.6 25924.4,35685.7\" fill=\"none\"  stroke=\"rgba(195, 60, 81, 0.624413)\" stroke-width=\"38727.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <polyline points=\"22325.6,22325.6 25924.4,35685.7 22325.6,22325.6\" fill=\"none\"  stroke=\"rgb(2, 81, 213)\" stroke-width=\"38727.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <polyline points=\"22325.6,22325.6 25924.4,35685.7 22325.6,22325.6\" fill=\"none\"  stroke=\"rgba(81, 152, 19, 0.683438)\" stroke-width=\"38727.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n  <text x=\"25924.4\" y=\"35685.7\" dx=\"59718.9\" dy=\"15913.5\" font_size=\"78497\" font_family=\"Verdana\" font_weight=\"bold\"  fill=\"coral\" stroke=\"coral\" stroke-width=\"34006.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\">RkYZl</text>\n  <text x=\"25924.4\" y=\"35685.7\" dx=\"59718.9\" dy=\"15913.5\" font_size=\"78497\" font_family=\"Verdana\" font_weight=\"bold\"  fill=\"rgba(195, 60, 81, 0.624413)\">RkYZl</text>\n  <text x=\"22325.6\" y=\"22325.6\" dx=\"59718.9\" dy=\"15913.5\" font_size=\"78497\" font_family=\"Verdana\" font_weight=\"bold\"  fill=\"coral\" stroke=\"coral\" stroke-width=\"34006.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\">RkYZl</text>\n  <text x=\"22325.6\" y=\"22325.6\" dx=\"59718.9\" dy=\"15913.5\" font_size=\"78497\" font_family=\"Verdana\" font_weight=\"bold\"  fill=\"rgba(195, 60, 81, 0.624413)\">RkYZl</text>\n  <text x=\"22325.6\" y=\"22325.6\" dx=\"59718.9\" dy=\"15913.5\" font_size=\"78497\" font_family=\"Verdana\" font_weight=\"bold\"  fill=\"coral\" stroke=\"coral\" stroke-width=\"34006.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\">i</text>\n  <text x=\"22325.6\" y=\"22325.6\" dx=\"59718.9\" dy=\"15913.5\" font_size=\"78497\" font_family=\"Verdana\" font_weight=\"bold\"  fill=\"rgb(2, 81, 213)\">i</text>\n  <text x=\"25924.4\" y=\"35685.7\" dx=\"59718.9\" dy=\"15913.5\" font_size=\"78497\" font_family=\"Verdana\" font_weight=\"bold\"  fill=\"coral\" stroke=\"coral\" stroke-width=\"34006.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\">i</text>\n  <text x=\"25924.4\" y=\"35685.7\" dx=\"59718.9\" dy=\"15913.5\" font_size=\"78497\" font_family=\"Verdana\" font_weight=\"bold\"  fill=\"rgb(2, 81, 213)\">i</text>\n  <text x=\"22325.6\" y=\"22325.6\" dx=\"59718.9\" dy=\"15913.5\" font_size=\"78497\" font_family=\"Verdana\" font_weight=\"bold\"  fill=\"coral\" stroke=\"coral\" stroke-width=\"34006.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\">jUYheoA3Mcm2 kqTN</text>\n  <text x=\"22325.6\" y=\"22325.6\" dx=\"59718.9\" dy=\"15913.5\" font_size=\"78497\" font_family=\"Verdana\" font_weight=\"bold\"  fill=\"rgba(81, 152, 19, 0.683438)\">jUYheoA3Mcm2 kqTN</text>\n  <circle cx=\"22325.6\" cy=\"22325.6\" r=\"21462.7\"  fill=\"white\"/>\n  <circle cx=\"25924.4\" cy=\"35685.7\" r=\"21462.7\"  fill=\"white\"/>\n  <text x=\"22325.6\" y=\"22325.6\" dx=\"-23192\" dy=\"92100.2\" font_size=\"86988\" font_family=\"Verdana\"  fill=\"coral\" stroke=\"coral\" stroke-width=\"34006.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\">gtKSYiTpuO3KjmLenbqOj7iO</text>\n  <text x=\"22325.6\" y=\"22325.6\" dx=\"-23192\" dy=\"92100.2\" font_size=\"86988\" font_family=\"Verdana\"  fill=\"black\">gtKSYiTpuO3KjmLenbqOj7iO</text>\n  <text x=\"25924.4\" y=\"35685.7\" dx=\"-23192\" dy=\"92100.2\" font_size=\"86988\" font_family=\"Verdana\"  fill=\"coral\" stroke=\"coral\" stroke-width=\"34006.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\">vtkKOKMLWRQv</text>\n  <text x=\"25924.4\" y=\"35685.7\" dx=\"-23192\" dy=\"92100.2\" font_size=\"86988\" font_family=\"Verdana\"  fill=\"black\">vtkKOKMLWRQv</text>\n</svg>",
-        "request_id": 486321339
+        "items": [
+
+        ],
+        "request_id": 4,
+        "total_time": 0
     }
 ]
